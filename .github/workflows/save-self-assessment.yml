@@ -53,7 +53,7 @@ jobs:
           emoji = {
               "Ja": "🟢",
               "Nej": "🔴",
-              "Ved ikke": "🟡",
+              "Ved ikke": "🔴",
               "Ikke relevant": "⚪",
               "Planlagt": "🟡"
           }
@@ -61,7 +61,7 @@ jobs:
           colors = {
               "Ja": "#198754",
               "Nej": "#dc3545",
-              "Ved ikke": "#ffc107",
+              "Ved ikke": "#dc3545",
               "Ikke relevant": "#6c757d",
               "Planlagt": "#ffc107"
           }
