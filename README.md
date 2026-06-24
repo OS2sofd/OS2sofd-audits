@@ -143,7 +143,7 @@ Kan læses direkte i GitHub.
 |---------|---------|
 | Ja | 🟢 Grøn |
 | Nej | 🔴 Rød |
-| Ved ikke | 🟡 Gul |
+| Ved ikke | 🔴 Rød |
 | Planlagt | 🟡 Gul |
 | Ikke relevant | ⚪ Grå |
 
