@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>OS2sofd - Selvevaluering</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1200px;margin:0 auto;padding:30px;line-height:1.6;}
+h1{border-bottom:3px solid #ddd;padding-bottom:10px;}
+.meta{background:#f5f5f5;padding:15px;border-radius:8px;}
+.toc{background:#fafafa;padding:20px;border:1px solid #ddd;border-radius:8px;}
+.toc li{margin-bottom:6px;}
+.krav{margin-top:30px;border:1px solid #ddd;border-radius:8px;padding:20px;}
+.badge{display:inline-block;color:white;padding:6px 12px;border-radius:5px;font-weight:bold;}
+.doc{white-space:pre-wrap;}
+</style>
+</head>
+<body>
+<h1>OS2sofd - Selvevaluering</h1>
+<div class="meta">
+<strong>Udfyldt af:</strong> OS2sofd styregruppe<br>
+<strong>Dato:</strong> 2026-06-23<br>
+<strong>Kilde:</strong> os2sofd-20260624T111229Z.json
+</div>
+<h2>Indholdsfortegnelse</h2>
+<ul class="toc">
+<li><a href="#R1">R1 - Løsningen skaber lokal værdi</a></li>
+<li><a href="#R2">R2 - Løsningen er accepteret af lokal linjeledelse</a></li>
+<li><a href="#R3">R3 - Løsningen har fælles offentligt potentiale</a></li>
+<li><a href="#R4">R4 - Ophæng til nationale strategier er til stede</a></li>
+<li><a href="#F1">F1 - Alt kildekode til projektet udvikles synligt og aktivt i et repositorie og versionskontrolsystem, anvist af OS2</a></li>
+<li><a href="#F2">F2 - Open Source licenskriterier overholdes</a></li>
+<li><a href="#F3">F3 - Udbudsregler og alm. lovformlighed er overholdt</a></li>
+<li><a href="#F4">F4 - Der er tænkt på sikkerheden i løsningen</a></li>
+<li><a href="#F5">F5 - Løsningens formål og værdi er beskrevet</a></li>
+<li><a href="#F6">F6 - Kildekoden er overdraget og er placeret under OS2&#x27;s kontrol</a></li>
+<li><a href="#F7">F7 - Alt dokumentation til projektet udarbejdes med og overholder OS2s standardskabelon for dokumentation.</a></li>
+<li><a href="#F10">F10 - OS2&#x27;s kommunikationskanaler anvendes (OS2.eu)</a></li>
+<li><a href="#F11">F11 - Der anvendes offentlig issue-tracking anvist af OS2, hvor der tydeligt henvises til specifikke kodeændringer</a></li>
+<li><a href="#F12">F12 - Der er kun en version af core koden</a></li>
+<li><a href="#F13">F13 - Der er udarbejdet præsentationsmateriale af løsningen</a></li>
+<li><a href="#F14">F14 - Der er udarbejdet kommunikationsmateriale til strategisk niveau</a></li>
+<li><a href="#F15">F15 - Best practice for implementering i organisationen dokumenteres</a></li>
+<li><a href="#F16">F16 - Teknisk dokumentation indeholder best practice for kodestandarder i forhold til de anvendte teknologier</a></li>
+<li><a href="#F17">F17 - Drifts og vedligeholdelses setup er beskrevet</a></li>
+<li><a href="#F18">F18 - Rammearkitekturen og standarder er fulgt og afvigelser er forklaret</a></li>
+<li><a href="#F19">F19 - Løsningen er leveret i et containerformat f.eks. docker (anbefaling)</a></li>
+<li><a href="#F20">F20 - Uddannelsesmateriale er udarbejdet (anbefaling)</a></li>
+<li><a href="#F21">F21 - Politisk kommunikation er udarbejdet (Lokal + Omverden)</a></li>
+<li><a href="#F22">F22 - Procesplan + procesansvar for driftsimplementering er udarbejdet</a></li>
+<li><a href="#S1">S1 - Produktet har en kobling til OS2&#x27;s strategi</a></li>
+<li><a href="#S2">S2 - Løsningen understøtter innovation og open source</a></li>
+<li><a href="#S3">S3 - Produktets (forventlige) kobling til OS2&#x27;s mission, vision og strategi er beskrevet</a></li>
+<li><a href="#S4">S4 - Der er udarbejdet en vision og strategi for produktet</a></li>
+<li><a href="#S5">S5 - Produktets kobling til og overensstemmelse med OS2&#x27;s vision og strategi er tilstede og beskrevet</a></li>
+<li><a href="#G1">G1 - Produktet er oprettet i OS2&#x27;s porteføljestyring</a></li>
+<li><a href="#G2">G2 - Der koordineres løbende med OS2-sekretariatet</a></li>
+<li><a href="#G3">G3 - Der er udpeget en projektleder/tovholder</a></li>
+<li><a href="#G4">G4 - Bestyrelsen er orienteret</a></li>
+<li><a href="#G5">G5 - Bestyrelsen har godkendt produktet</a></li>
+<li><a href="#G6">G6 - Der er nedsat en styregruppe</a></li>
+<li><a href="#G7">G7 - Der er nedsat en koordinationsgruppe (anbefaling)</a></li>
+<li><a href="#G8">G8 - En projektmodel anvendes og er dokumenteret (anbefaling)</a></li>
+<li><a href="#G9">G9 - Review af kode foretages af tredjepart (anbefaling)</a></li>
+<li><a href="#G10">G10 - Der er udarbejdet en tilslutningserklæring til sikring af økonomi (anbefaling)</a></li>
+<li><a href="#G11">G11 - Bestyrelsen har godkendt styregruppen</a></li>
+<li><a href="#G12">G12 - Bestyrelsen er repræsenteret i styregruppen</a></li>
+<li><a href="#G13">G13 - Der foreligger en aftale der sikrer økonomi til koordinering og videreudvikling</a></li>
+<li><a href="#G14">G14 - Der er etableret et fagligt fællesskab bag løsningen hvor erfaringer kan udveksles</a></li>
+</ul>
+<div class="krav" id="R1">
+<h2>R1 - Løsningen skaber lokal værdi</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> relevans</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv den konkrete værdi løsningen skaber i organisationen. F.eks. økonomisk, organisatorisk eller brugerrelateret.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd samler autoritative organisationsdata, understøtter IdM-processer, integrationer og distribution af forretningsdata.
+https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&amp;editing=false&amp;openfile=true</div>
+</div>
+<div class="krav" id="R2">
+<h2>R2 - Løsningen er accepteret af lokal linjeledelse</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> relevans</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv eller henvis til en formel accept fra ledelse hos initiativtagerne til løsningen.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Løsningen er fra start taget i anvendelse af kommunerne i DIGIT og 3K kommunerne</div>
+</div>
+<div class="krav" id="R3">
+<h2>R3 - Løsningen har fælles offentligt potentiale</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> relevans</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Redegør for hvordan løsningen kan bruges på tværs af kommuner og/eller offentlige myndigheder.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd anvendes af mere end 50 kommuner og er en veletableret fælleskommunal løsning.
+
+Løsningen understøttes af et aktivt community med løbende erfaringsudveksling, koordinering og fælles prioritering af udviklingsønsker. Der gennemføres to velbesøgte årlige ERFA-møder, som bidrager til videndeling og styrker det tværkommunale samarbejde omkring løsningen.
+
+Den brede anvendelse og det aktive fællesskab dokumenterer et betydeligt fællesoffentligt potentiale og en fortsat interesse for fælles udvikling og genbrug på tværs af kommunerne.</div>
+</div>
+<div class="krav" id="R4">
+<h2>R4 - Ophæng til nationale strategier er til stede</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> relevans</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Henvis til relevante strategier og forklar hvordan løsningen understøtter disse.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="F1">
+<h2>F1 - Alt kildekode til projektet udvikles synligt og aktivt i et repositorie og versionskontrolsystem, anvist af OS2</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Upload al kildekode i et offentligt OS2 repository med aktiv versionshistorik.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd udvikles i leverandørens primære udviklingsrepository som led i den daglige udviklings- og releaseproces. Ved hver kvartalsrelease overføres den samlede kildekode til det officielle OS2-repository, som dermed fungerer som det autoritative open source-repository for produktet.
+
+Denne model er valgt for at sikre en effektiv udviklingsproces, samtidig med at OS2-fællesskabet til enhver tid har adgang til den aktuelle frigivne kildekode, den fulde versionshistorik for de frigivne versioner samt mulighed for at overtage videreudvikling af løsningen.
+
+Løsningen vurderes derfor at opfylde intentionen bag kravet om åbenhed, gennemsigtighed og fælles ejerskab af kildekoden. Det anerkendes dog, at udviklingen ikke foregår direkte i OS2-repositoriet på daglig basis, men at synkronisering sker ved de regelmæssige kvartalsvise releases.
+Der er samtidig tale om et aktivt vedligeholdt repository med løbende releases. Seneste release er overført til OS2-repositoriet i forbindelse med den kvartalsvise releaseproces, og repositoryet indeholder dokumenteret versionshistorik for produktet. Udviklingsaktiviteten i leverandørens repository afspejles efterfølgende i de frigivne versioner i OS2-repositoriet.</div>
+</div>
+<div class="krav" id="F2">
+<h2>F2 - Open Source licenskriterier overholdes</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv hvilken OSI-godkendt licens projektet bruger. OS2 standard er MPL 2.0</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Frigivet under Mozilla Public License 2.0.</div>
+</div>
+<div class="krav" id="F3">
+<h2>F3 - Udbudsregler og alm. lovformlighed er overholdt</h2>
+<p><span class="badge" style="background:#ffc107">Ved ikke</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Bekræft at udbudspligt er overholdt eller redegør for undtagelse. Vedlæg evt. beslutningsnotat.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">I den tidligere OS2-governancevurdering er det anført, at de udbudsretlige forhold blev afklaret i forbindelse med ibrugtagning hos DIGIT og 3K. Der foreligger dog ikke dokumentation herfor i det tilgængelige materiale.</div>
+</div>
+<div class="krav" id="F4">
+<h2>F4 - Der er tænkt på sikkerheden i løsningen</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv hvordan sikkerhed er indtænkt i design, kode og drift – f.eks. kryptering, adgangsstyring.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd er designet med fokus på sikkerhed og databeskyttelse. Løsningen anvender rollebaseret adgangsstyring, fødereret login via SAML, rettighedsstyrede API&#x27;er, dataafgrænsning og logning. Der føres historik over alle dataændringer og auditlogs over centrale processer. Adgang til API&#x27;er sker via API-nøgler med afgrænsede rettigheder, og data deles kontrolleret med tilknyttede systemer. Arkitekturen er desuden opbygget efter principper om security-by-design og privacy-by-design.</div>
+</div>
+<div class="krav" id="F5">
+<h2>F5 - Løsningens formål og værdi er beskrevet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Henvis til dokumentation (f.eks. README) hvor formål og målgruppe fremgår.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Formål og målgruppe er beskrevet i produktbeskrivelsen for OS2sofd. Løsningen beskrives som fundamentet for organisationens data- og identitetsstyring, hvor autoritative organisationsdata samles ét sted og anvendes til bruger- og adgangsstyring, integrationer og automatisering af IdM-processer. Dokumentationen er målrettet både beslutningstagere, arkitekter og driftsorganisationer i kommunerne. https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&amp;editing=false&amp;openfile=true</div>
+</div>
+<div class="krav" id="F6">
+<h2>F6 - Kildekoden er overdraget og er placeret under OS2&#x27;s kontrol</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Bekræft og link til det officielle repository i OS2s versionskontrol.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">https://github.com/OS2sofd/os2sofd
+</div>
+</div>
+<div class="krav" id="F7">
+<h2>F7 - Alt dokumentation til projektet udarbejdes med og overholder OS2s standardskabelon for dokumentation.</h2>
+<p><span class="badge" style="background:#dc3545">Nej</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Brug OS2’s standard template til dokumentation. http://github.com/OS2offdig/os2-docs-template</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der foreligger omfattende produkt-, drifts-, arkitektur- og præsentationsdokumentation for OS2sofd, herunder produktbeskrivelse, teknisk dokumentation, driftsbeskrivelser og præsentationsmateriale. Dokumentationen er dog ikke på nuværende tidspunkt struktureret efter OS2&#x27;s standardiserede dokumentationsskabelon.
+
+Eksisterende dokumentation vil kunne danne grundlag for en fremtidig tilpasning til OS2&#x27;s dokumentationsstandard, hvis dette prioriteres som en del af produktets videre modning.
+
+Henvisninger:
+https://www.sofd.io/documentation/SOFD%20Core%20-%20Produktbeskrivelse.pdf
+https://www.sofd.io/documentation/SOFD%20Core%20-%20pr%C3%A6sentationsmateriale.pdf
+https://www.sofd.io/documentation/SOFD%20Core%20-%20IdM%20processer%20-%20overblik.pdf</div>
+</div>
+<div class="krav" id="F10">
+<h2>F10 - OS2&#x27;s kommunikationskanaler anvendes (OS2.eu)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Bekræft og link til omtale på f.eks. os2.eu, nyhedsbrev eller andet.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Arrangementer:
+https://os2offdig.odoo.com/event/os2sofd-erfalab-150/register
+https://os2offdig.odoo.com/event/os2sofd-erfa-dag-136/register
+Nyhedsbrev:
+https://app.heyloyalty.com/view/ZXlKcGRpSTZJbU5pVVd4eFVXRXliamhIZG1vMlNteDZhVEJDU2tFOVBTSXNJblpoYkhWbElqb2lia1pXVFdWalZXcFpSMVV4YVVsc1lqVmFXbWxqV1c5bVpuaERhMU5pVERSRlJsSm5USHBPVG5vNFlUQkxLMGhzTTJObFZHeDNRaTlWV1VOVllpc3ZLMlphYVZobVdEbFhUbWN6TW5Cck5HaDZNVmN6VUhKaVpYSnJNbGROU0dob1VVcDVTbGRTZDNwNWVuVlJlbmt6VUhKT1UzZFViRzlMVHpCc1JERmhlbXBwVHpNeFNUUXljeXRSU0hSaGJEUXlMelUzU0RsMFpVdDVjM05WVURGVlZFczRUbXR5ZUdNNGFUazBQU0lzSW0xaFl5STZJbVEwTURBeE5HWXhPRFJqWlRBME1USXpOamt6WXprM1pUTTJPVFkwTnpRME5EaGtZVEJtTXpRME0yVmhaV1JpWldNNE5tWTBZVFl4WVRoalptVmxOVElpTENKMFlXY2lPaUlpZlE9PQ==</div>
+</div>
+<div class="krav" id="F11">
+<h2>F11 - Der anvendes offentlig issue-tracking anvist af OS2, hvor der tydeligt henvises til specifikke kodeændringer</h2>
+<p><span class="badge" style="background:#dc3545">Nej</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Henvis til f.eks. Issues, hvor opgaver er koblet til pull-requests/commits.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd anvender GitHub Projects som offentlig platform til registrering, prioritering og håndtering af ændringsønsker. Projektet har en synlig proces for behandling af ønsker fra idé til færdig løsning, og ændringsønsker er offentligt tilgængelige via GitHub.
+
+Der foreligger dog ikke på nuværende tidspunkt dokumentation for en systematisk kobling mellem ændringsønsker, pull requests og konkrete commits i det offentlige repository, som foreskrevet i kravet. Kravet vurderes derfor kun delvist opfyldt.
+
+Henvisning:
+https://github.com/orgs/OS2sofd/projects/1/views/1</div>
+</div>
+<div class="krav" id="F12">
+<h2>F12 - Der er kun en version af core koden</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Bekræft at der kun findes én ‘main’ version og at den er aktivt vedligeholdt.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd har én fælles hovedversion af core-koden (master), som fungerer som den autoritative kodebase for produktet. Repositoryet vedligeholdes aktivt med løbende fejlrettelser, forbedringer og release-forløb, senest dokumenteret gennem commits og releases i 2026.</div>
+</div>
+<div class="krav" id="F13">
+<h2>F13 - Der er udarbejdet præsentationsmateriale af løsningen</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Link til f.eks. slides, brochurer eller andet introduktionsmateriale.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&amp;editing=false&amp;openfile=true</div>
+</div>
+<div class="krav" id="F14">
+<h2>F14 - Der er udarbejdet kommunikationsmateriale til strategisk niveau</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">F.eks. businesscase, one-pager til direktionsniveau og præsentation til udvalg.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&amp;editing=false&amp;openfile=true</div>
+</div>
+<div class="krav" id="F15">
+<h2>F15 - Best practice for implementering i organisationen dokumenteres</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv implementeringsvejledning, erfaringsopsamling eller cases.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der foreligger implementeringsdokumentation for OS2sofd i form af implementeringsdrejebøger, tekniske vejledninger og integrationsbeskrivelser. Dokumentationen omfatter blandt andet &quot;Drejebog til idriftsættelse af IdM Etape 2&quot; og &quot;Drejebog til idriftsættelse af IdM Etape 3&quot; samt vejledninger til opsætning af integrationer, SAML-login, AD-synkronisering og Identity Management-processer.
+
+Dokumentationen indeholder både praktiske implementeringsanbefalinger og beskrivelser af anbefalede implementeringsforløb for kommuner.
+
+Henvisning:
+https://www.sofd.io/documentation.html</div>
+</div>
+<div class="krav" id="F16">
+<h2>F16 - Teknisk dokumentation indeholder best practice for kodestandarder i forhold til de anvendte teknologier</h2>
+<p><span class="badge" style="background:#dc3545">Nej</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv hvilke kodestandarder projektet følger. Evt. med links til eksterne guides og supplerende retningslinjer.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der foreligger ikke projektspecifik dokumentation for OS2sofd vedrørende kodestandarder og udviklingsprincipper. Leverandøren anvender interne retningslinjer og procedurer for blandt andet sikker udvikling, logning, datamodellering, caching, kryptografi, nøglehåndtering og persondatabeskyttelse, men disse er ikke dokumenteret som en del af projektets offentlige dokumentation.
+
+Der er derfor ikke offentlig tilgængelig dokumentation, som opfylder kravet om dokumenterede kodestandarder og best practices for de anvendte teknologier.
+</div>
+</div>
+<div class="krav" id="F17">
+<h2>F17 - Drifts og vedligeholdelses setup er beskrevet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Redegør for driftspartner(e), ansvar og finansiering. Hvem drifter, hvem vedligeholder og hvem koordinerer.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Driftspartner: Digital Identity
+Drift, vedligeholdelse og videreudvikling af OS2sofd er organiseret gennem OS2-governance og de tilhørende tilslutningsaftaler.
+
+OS2 varetager governance, koordinering af udviklingsforslag, fælles leverandørstyring samt koordinering af vedligeholdelse og videreudvikling af løsningen. OS2 indgår desuden leverandøraftaler vedrørende videreudvikling af produktet.
+
+De enkelte anvenderkommuner er ansvarlige for lokale leverandøraftaler vedrørende drift og support af OS2sofd.
+
+Finansieringen sker gennem en tilslutningsafgift samt et årligt vederlag fra de deltagende kommuner. Vederlaget dækker koordinering, vedligeholdelse og udvikling af løsningen.
+
+Løsningen består af et centralt webbaseret kernesystem med tilhørende integrationsagenter og moduler, herunder integrationer til AD, Exchange, OPUS og øvrige fagsystemer.</div>
+</div>
+<div class="krav" id="F18">
+<h2>F18 - Rammearkitekturen og standarder er fulgt og afvigelser er forklaret</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv om/hvordan løsningen følger fællesoffentlig rammearkitektur – eller forklar hvorfor ikke.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd er designet som bindeled mellem kommunens lokale infrastruktur og fælleskommunale/fællesoffentlige infrastrukturer og understøtter centrale principper i den fælleskommunale rammearkitektur. Løsningen bidrager til sammenhængende dataanvendelse på tværs af systemer, genbrug af data, tværgående automatisering og integration med fællesoffentlige infrastrukturer, herunder FK Organisation.
+
+Løsningen understøtter særligt arkitekturprincipperne om fælles styring, sammenhæng og innovation, tværgående procesunderstøttelse, deling og genbrug af data samt effektivt samarbejde mellem it-løsninger.
+</div>
+</div>
+<div class="krav" id="F19">
+<h2>F19 - Løsningen er leveret i et containerformat f.eks. docker (anbefaling)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv om løsningen tilbydes i en containeriseret version som definerer hvordan applikationen bygges og køres.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">De centrale OS2sofd-komponenter, som driftes hos leverandøren, bygges og deployeres i Docker-containere. De komponenter, som installeres lokalt hos kommunerne, leveres som Windows Services, hvilket følger best practice for den understøttede afviklingsplatform.
+
+Løsningen understøtter således containeriseret drift af de centralt driftede komponenter, mens lokale integrationskomponenter deployeres efter de anbefalede principper for Windows Server-miljøer.
+</div>
+</div>
+<div class="krav" id="F20">
+<h2>F20 - Uddannelsesmateriale er udarbejdet (anbefaling)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Henvis til manual, brugervejledning eller andet brugerrelateret materiale.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der er udarbejdet omfattende bruger- og uddannelsesmateriale for OS2sofd, herunder brugermanual, produktbeskrivelser, procesbeskrivelser, implementeringsvejledninger og præsentationsmateriale. Materialet er tilgængeligt via projektets dokumentationssite samt i GitHub-repositoriets dokumentationsmappe og understøtter både administratorer, projektledere og øvrige brugere i anvendelse og implementering af løsningen.
+
+Henvisninger:
+
+https://www.sofd.io/documentation.html
+GitHub repository → /doc
+SOFD Core - Brugermanual
+SOFD Core - Produktbeskrivelse
+SOFD Core - IdM processer - overblik</div>
+</div>
+<div class="krav" id="F21">
+<h2>F21 - Politisk kommunikation er udarbejdet (Lokal + Omverden)</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv indhold der kan bruges i politiske fora – f.eks. beslutningsoplæg eller pressemeddelelse.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="F22">
+<h2>F22 - Procesplan + procesansvar for driftsimplementering er udarbejdet</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> formkrav</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Tilføj en implementeringsplan med ‘hvem gør hvad hvornår’.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="S1">
+<h2>S1 - Produktet har en kobling til OS2&#x27;s strategi</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> strategisk</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv hvordan produktet understøtter tværoffentlige behov, deling og fællesskab.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd understøtter tværkommunal deling og genbrug af løsninger ved at tilbyde en fælles open source-platform til håndtering af organisationsdata og identitetsstyring. Løsningen anvendes af mere end 50 kommuner og understøttes af et aktivt community med løbende erfaringsudveksling, fælles prioritering og fælles udvikling.
+
+Der afholdes to årlige ERFA-arrangementer, og løsningen bidrager til fællesoffentlig sammenhæng ved at fungere som bindeled mellem lokale systemer og fælleskommunale infrastrukturer som FK Organisation.
+</div>
+</div>
+<div class="krav" id="S2">
+<h2>S2 - Løsningen understøtter innovation og open source</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> strategisk</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv hvordan open source-værdier og nyskabelse er tænkt ind.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd udvikles og distribueres som open source-software under MPL 2.0-licensen. Kildekoden er tilgængelig i OS2&#x27;s GitHub-repository, og løsningen videreudvikles i samarbejde mellem kommuner og leverandør.
+
+Den fælles udviklingsmodel gør det muligt for kommunerne at genbruge funktionalitet, dele erfaringer og bidrage til videreudvikling af løsningen. Nye behov og forbedringer identificeres og prioriteres gennem det fælles community, hvilket understøtter innovation og fælles værdiskabelse.
+</div>
+</div>
+<div class="krav" id="S3">
+<h2>S3 - Produktets (forventlige) kobling til OS2&#x27;s mission, vision og strategi er beskrevet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> strategisk</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv hvor produktet matcher med OS2&#x27;s formål og indsatser.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd understøtter OS2&#x27;s mission om at skabe værdi gennem fællesoffentlige open source-løsninger. Produktet er kommuneejet, anvendes bredt på tværs af kommuner og videreudvikles gennem et fælles samarbejde mellem kommuner, leverandør og OS2-fællesskabet.
+
+Løsningen bidrager til digital sammenhængskraft ved at standardisere og dele organisationsdata på tværs af systemer og understøtter dermed OS2&#x27;s strategiske fokus på fællesskab, genbrug, deling og fælles udvikling.
+</div>
+</div>
+<div class="krav" id="S4">
+<h2>S4 - Der er udarbejdet en vision og strategi for produktet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> strategisk</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskriv produktvision og strategiske mål.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd er designet til at være kommunens fælles platform for organisations- og medarbejderdata med princippet om &quot;mange kilder – én sandhed&quot;. Løsningen samler, kvalitetssikrer, beriger og distribuerer organisationsdata på tværs af kommunens systemlandskab og understøtter automatiserede identitets- og adgangsstyringsprocesser. Produktet er samtidig designet som integrationsplatform mellem lokale systemer og fælleskommunale/fællesoffentlige løsninger som FK Organisation, OS2rollekatalog og øvrige fælles infrastrukturer. Produktbeskrivelsen beskriver både de bærende arkitekturprincipper og den langsigtede rolle som fælles datagrundlag for kommunens organisations- og identitetsdata</div>
+</div>
+<div class="krav" id="S5">
+<h2>S5 - Produktets kobling til og overensstemmelse med OS2&#x27;s vision og strategi er tilstede og beskrevet</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> strategisk</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Forklar hvordan løsningen passer ind i OS2’s overordnede værdisæt og visioner.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="G1">
+<h2>G1 - Produktet er oprettet i OS2&#x27;s porteføljestyring</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Produktet er oprettet på OS2s hjemmeside og indgår i årshjul.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd er et etableret OS2-produkt med egen produktside på OS2&#x27;s hjemmeside og indgår i OS2-porteføljen. Produktet har officiel OS2-governance, community og tilknyttede aktiviteter.</div>
+</div>
+<div class="krav" id="G2">
+<h2>G2 - Der koordineres løbende med OS2-sekretariatet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Bekræft, evt. med årshjul/datoer/mails for koordinering.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der gennemføres løbende koordinering mellem produktets governance, leverandør og OS2-sekretariatet i forbindelse med communityaktiviteter, roadmap, produktstatus og governance. Produktet indgår i OS2&#x27;s produktportefølje og følger den etablerede OS2-governancemodel.</div>
+</div>
+<div class="krav" id="G3">
+<h2>G3 - Der er udpeget en projektleder/tovholder</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Navngiv og beskriv rolle og opgaver.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Produktkoordinator: Erling Haunstrup Poulsen, Syddjurs Kommune
+Community manager: Ane Bundgaard Andreasen 
+Koordineringen varetages gennem produktets governance-struktur med ansvar for community, roadmap, releaseplanlægning og koordinering mellem kommuner, leverandør og OS2.</div>
+</div>
+<div class="krav" id="G4">
+<h2>G4 - Bestyrelsen er orienteret</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Vedlæg dokumentation for orientering.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd har gennem flere år været en del af OS2-porteføljen og har løbende været behandlet i OS2&#x27;s governance-struktur. Bestyrelsen er orienteret gennem produktets optagelse, statusrapportering og efterfølgende governance-aktiviteter.</div>
+</div>
+<div class="krav" id="G5">
+<h2>G5 - Bestyrelsen har godkendt produktet</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Vedlæg dokumentation for godkendelse.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">OS2sofd er et etableret OS2-produkt og må derfor anses for at være godkendt gennem OS2&#x27;s formelle governance- og porteføljestyringsproces. Produktet er optaget i OS2-porteføljen og drives under OS2&#x27;s governance-model.</div>
+</div>
+<div class="krav" id="G6">
+<h2>G6 - Der er nedsat en styregruppe</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskrivelse af styregruppen og roller/ansvar/opgaver.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der er etableret en styregruppe omkring OS2sofd med deltagelse fra anvenderkommuner. Styregruppen prioriterer udvikling, roadmap og økonomi samt understøtter den strategiske udvikling af produktet.
+</div>
+</div>
+<div class="krav" id="G7">
+<h2>G7 - Der er nedsat en koordinationsgruppe (anbefaling)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskrivelse af koordinationsgruppen og roller/ansvar/opgaver.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der er etableret en koordinationsgruppe/community omkring OS2sofd, som løbende behandler ændringsønsker, prioriterer udviklingsopgaver og koordinerer samarbejdet mellem kommuner og leverandør. Der afholdes desuden to årlige ERFA-arrangementer med bred deltagelse fra anvenderkommunerne</div>
+</div>
+<div class="krav" id="G8">
+<h2>G8 - En projektmodel anvendes og er dokumenteret (anbefaling)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Beskiv den anvendte projektmodel eller metode.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Udviklingen af OS2sofd følger en struktureret governance- og releaseproces med registrering og prioritering af ændringsønsker, koordinering i communityet samt planlagte releases. Ændringsønsker håndteres via GitHub Projects og indgår i en formaliseret proces fra idé til implementering og release.
+https://github.com/orgs/OS2sofd/projects/1/views/1</div>
+</div>
+<div class="krav" id="G9">
+<h2>G9 - Review af kode foretages af tredjepart (anbefaling)</h2>
+<p><span class="badge" style="background:#dc3545">Nej</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv hvilken ekstern part som udfører eller har udført review.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="G10">
+<h2>G10 - Der er udarbejdet en tilslutningserklæring til sikring af økonomi (anbefaling)</h2>
+<p><span class="badge" style="background:#198754">Ja</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Vedlæg eller henvis til dokument for tilslutning og økonomi.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc">Der foreligger en tilslutningsaftale for OS2sofd, som beskriver deltagelse i fællesskabet samt de økonomiske forpligtelser for de deltagende kommuner. Aftalen indeholder bestemmelser om tilslutningsafgift og årligt vederlag til finansiering af koordinering, vedligeholdelse og videreudvikling af løsningen. Tilslutningsaftalen bidrager dermed til at sikre det økonomiske grundlag for den fortsatte drift og udvikling af produktet.
+https://boks.os2.eu/s/Di5cTQdSABd6ak4?dir=/Produkter/OS2sofd%20-%20Offentlig/Tilslutning%20og%20takstblad&amp;editing=false&amp;openfile=true
+https://boks.os2.eu/s/Di5cTQdSABd6ak4?dir=/Produkter/OS2sofd%20-%20Offentlig/Tilslutning%20og%20takstblad&amp;editing=false&amp;openfile=true</div>
+</div>
+<div class="krav" id="G11">
+<h2>G11 - Bestyrelsen har godkendt styregruppen</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Vedlæg dokumentation for beslutning.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="G12">
+<h2>G12 - Bestyrelsen er repræsenteret i styregruppen</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Angiv hvilket medlem som deltager på vegne af bestyrelsen.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="G13">
+<h2>G13 - Der foreligger en aftale der sikrer økonomi til koordinering og videreudvikling</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Vedlæg eller beskriv finansieringsaftalen.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+<div class="krav" id="G14">
+<h2>G14 - Der er etableret et fagligt fællesskab bag løsningen hvor erfaringer kan udveksles</h2>
+<p><span class="badge" style="background:#6c757d">Ikke relevant</span></p>
+<p><strong>Kategori:</strong> governance</p>
+<p><strong>Retningslinjer:</strong></p>
+<div class="doc">Henvis til brugerforum og/eller årshjul for aktiviteter.</div>
+<p><strong>Dokumentation:</strong></p>
+<div class="doc"></div>
+</div>
+</body>
+</html>
