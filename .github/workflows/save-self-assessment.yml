@@ -138,7 +138,9 @@ jobs:
                   f'<a href="#{kid}">{kid} - {title}</a>'
                   f'</li>'
               )
+
           out.append("</ul>")
+          
           for krav in data.get("krav", []):
               kid = html.escape(krav.get("id", ""))
               title = html.escape(krav.get("krav", ""))
