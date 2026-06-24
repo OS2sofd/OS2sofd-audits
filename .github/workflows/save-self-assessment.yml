@@ -132,13 +132,13 @@ jobs:
               status = krav.get("efterlevet", "")
               color = colors.get(status, "#6c757d")
 
-          out.append(
-              f'<li>'
-              f'<span class="badge" style="background:{color}">{html.escape(status)}</span> '
-              f'<a href="#{kid}">{kid} - {title}</a>'
-              f'</li>'
-          )
-
+              out.append(
+                  f'<li>'
+                  f'<span class="badge" style="background:{color}">{html.escape(status)}</span> '
+                  f'<a href="#{kid}">{kid} - {title}</a>'
+                  f'</li>'
+              )
+          out.append("</ul>")
           for krav in data.get("krav", []):
               kid = html.escape(krav.get("id", ""))
               title = html.escape(krav.get("krav", ""))
