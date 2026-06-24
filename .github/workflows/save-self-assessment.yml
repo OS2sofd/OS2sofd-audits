@@ -1,4 +1,3 @@
-```yaml
 name: Save self assessment JSON
 
 on:
@@ -290,4 +289,3 @@ h1 {{
           git commit -m "Tilføj self assessment rapport" || echo "Ingen ændringer"
 
           git push
-```
