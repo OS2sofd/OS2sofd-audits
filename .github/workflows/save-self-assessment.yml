@@ -7,7 +7,6 @@ on:
         description: Produktnavn
         required: true
         type: string
-
       checklist_json:
         description: JSON payload
         required: true
@@ -27,265 +26,139 @@ jobs:
       - name: Gem JSON i self assessment mappe
         run: |
           mkdir -p docs/self-assessment
-
           SAFE_NAME=$(echo "${{ inputs.product_name }}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/-\+/-/g' | sed 's/^-//;s/-$//')
-
           TS=$(date -u +"%Y%m%dT%H%M%SZ")
-
           FILE="docs/self-assessment/${SAFE_NAME:-os2-produkt}-${TS}.json"
-
           cat > "$FILE" << 'EOF'
           ${{ inputs.checklist_json }}
           EOF
-
           echo "Saved $FILE"
 
-      - name: Generer Markdown rapport
+      - name: Generer rapporter
         run: |
           python << 'PYTHON'
           import json
+          import html
           from pathlib import Path
 
-          json_files = sorted(
-              Path("docs/self-assessment").glob("*.json")
-          )
-
+          folder = Path("docs/self-assessment")
+          json_files = sorted(folder.glob("*.json"))
           latest = json_files[-1]
+          data = json.loads(latest.read_text(encoding="utf-8"))
 
-          data = json.loads(
-              latest.read_text(encoding="utf-8")
-          )
-
-          md = []
-
-          md.append(
-              f"# {data.get('productName','Produkt')} - Selvevaluering"
-          )
-
-          md.append("")
-          md.append(f"**Udfyldt af:** {data.get('filledBy','')}")
-          md.append("")
-          md.append(f"**Dato:** {data.get('filledDate','')}")
-          md.append("")
-          md.append(f"**Kilde:** `{latest.name}`")
-          md.append("")
+          product = data.get("productName", "Produkt")
+          filled_by = data.get("filledBy", "")
+          filled_date = data.get("filledDate", "")
 
           emoji = {
               "Ja": "🟢",
               "Nej": "🔴",
               "Ved ikke": "🟡",
-              "Ikke relevant": "⚪"
+              "Ikke relevant": "⚪",
+              "Planlagt": "🟡"
           }
 
-          for krav in data.get("krav", []):
-
-              md.append("---")
-              md.append("")
-
-              md.append(
-                  f"## {krav.get('id','')} - {krav.get('krav','')}"
-              )
-
-              md.append("")
-
-              status = krav.get("efterlevet","")
-
-              md.append(
-                  f"**Status:** {emoji.get(status,'⚪')} {status}"
-              )
-
-              md.append("")
-              md.append(
-                  f"**Kategori:** {krav.get('kategori','')}"
-              )
-
-              md.append("")
-              md.append("**Dokumentation:**")
-              md.append("")
-              md.append(
-                  krav.get("dokumentation","")
-              )
-
-              md.append("")
-
-          Path(
-              "docs/self-assessment/latest.md"
-          ).write_text(
-              "\n".join(md),
-              encoding="utf-8"
-          )
-
-          PYTHON
-
-      - name: Generer HTML rapport
-        run: |
-          python << 'PYTHON'
-          import json
-          from pathlib import Path
-          import html
-
-          json_files = sorted(
-              Path("docs/self-assessment").glob("*.json")
-          )
-
-          latest = json_files[-1]
-
-          data = json.loads(
-              latest.read_text(encoding="utf-8")
-          )
-
-          status_colors = {
+          colors = {
               "Ja": "#198754",
               "Nej": "#dc3545",
               "Ved ikke": "#ffc107",
-              "Ikke relevant": "#6c757d"
+              "Ikke relevant": "#6c757d",
+              "Planlagt": "#ffc107"
           }
 
-          report = f"""
-<!DOCTYPE html>
-<html lang="da">
-<head>
-<meta charset="utf-8">
-<title>{html.escape(data['productName'])} - Selvevaluering</title>
-
-<style>
-
-body {{
-  font-family: Arial, Helvetica, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px;
-  line-height: 1.6;
-}}
-
-h1 {{
-  border-bottom: 3px solid #ddd;
-  padding-bottom: 10px;
-}}
-
-.meta {{
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
-}}
-
-.toc {{
-  background: #fafafa;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}}
-
-.toc li {{
-  margin-bottom: 6px;
-}}
-
-.krav {{
-  margin-top: 30px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-}}
-
-.badge {{
-  display: inline-block;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-weight: bold;
-}}
-
-.doc {{
-  white-space: pre-wrap;
-}}
-
-</style>
-</head>
-<body>
-
-<h1>{html.escape(data['productName'])} - Selvevaluering</h1>
-
-<div class="meta">
-<strong>Udfyldt af:</strong> {html.escape(data.get('filledBy',''))}<br>
-<strong>Dato:</strong> {html.escape(data.get('filledDate',''))}<br>
-<strong>Kilde:</strong> {html.escape(latest.name)}
-</div>
-
-<h2>Indholdsfortegnelse</h2>
-
-<ul class="toc">
-"""
+          # Markdown
+          md = []
+          md.append(f"# {product} - Selvevaluering")
+          md.append("")
+          md.append(f"**Udfyldt af:** {filled_by}")
+          md.append("")
+          md.append(f"**Dato:** {filled_date}")
+          md.append("")
+          md.append(f"**Kilde:** `{latest.name}`")
+          md.append("")
 
           for krav in data.get("krav", []):
-              report += (
-                  f'<li><a href="#{krav["id"]}">'
-                  f'{krav["id"]} - '
-                  f'{html.escape(krav["krav"])}</a></li>'
-              )
-
-          report += "</ul>"
-
-          for krav in data.get("krav", []):
-
               status = krav.get("efterlevet", "")
-              color = status_colors.get(status, "#6c757d")
+              md.append("---")
+              md.append("")
+              md.append(f"## {krav.get('id','')} - {krav.get('krav','')}")
+              md.append("")
+              md.append(f"**Status:** {emoji.get(status, '⚪')} {status}")
+              md.append("")
+              md.append(f"**Kategori:** {krav.get('kategori','')}")
+              md.append("")
+              md.append("**Retningslinjer:**")
+              md.append("")
+              md.append(krav.get("retningslinjer", ""))
+              md.append("")
+              md.append("**Dokumentation:**")
+              md.append("")
+              md.append(krav.get("dokumentation", ""))
+              md.append("")
 
-              report += f"""
-<div class="krav" id="{krav['id']}">
+          (folder / "latest.md").write_text("\n".join(md), encoding="utf-8")
 
-<h2>{krav['id']} - {html.escape(krav['krav'])}</h2>
+          # HTML bygges linje for linje for at undgå YAML-indrykningsproblemer
+          out = []
+          out.append("<!DOCTYPE html>")
+          out.append('<html lang="da">')
+          out.append("<head>")
+          out.append('<meta charset="utf-8">')
+          out.append(f"<title>{html.escape(product)} - Selvevaluering</title>")
+          out.append("<style>")
+          out.append("body{font-family:Arial,Helvetica,sans-serif;max-width:1200px;margin:0 auto;padding:30px;line-height:1.6;}")
+          out.append("h1{border-bottom:3px solid #ddd;padding-bottom:10px;}")
+          out.append(".meta{background:#f5f5f5;padding:15px;border-radius:8px;}")
+          out.append(".toc{background:#fafafa;padding:20px;border:1px solid #ddd;border-radius:8px;}")
+          out.append(".toc li{margin-bottom:6px;}")
+          out.append(".krav{margin-top:30px;border:1px solid #ddd;border-radius:8px;padding:20px;}")
+          out.append(".badge{display:inline-block;color:white;padding:6px 12px;border-radius:5px;font-weight:bold;}")
+          out.append(".doc{white-space:pre-wrap;}")
+          out.append("</style>")
+          out.append("</head>")
+          out.append("<body>")
+          out.append(f"<h1>{html.escape(product)} - Selvevaluering</h1>")
+          out.append('<div class="meta">')
+          out.append(f"<strong>Udfyldt af:</strong> {html.escape(filled_by)}<br>")
+          out.append(f"<strong>Dato:</strong> {html.escape(filled_date)}<br>")
+          out.append(f"<strong>Kilde:</strong> {html.escape(latest.name)}")
+          out.append("</div>")
+          out.append("<h2>Indholdsfortegnelse</h2>")
+          out.append('<ul class="toc">')
 
-<p>
-<span class="badge" style="background:{color}">
-{html.escape(status)}
-</span>
-</p>
+          for krav in data.get("krav", []):
+              kid = html.escape(krav.get("id", ""))
+              title = html.escape(krav.get("krav", ""))
+              out.append(f'<li><a href="#{kid}">{kid} - {title}</a></li>')
 
-<p>
-<strong>Kategori:</strong>
-{html.escape(krav.get('kategori',''))}
-</p>
+          out.append("</ul>")
 
-<p>
-<strong>Retningslinjer:</strong>
-</p>
+          for krav in data.get("krav", []):
+              kid = html.escape(krav.get("id", ""))
+              title = html.escape(krav.get("krav", ""))
+              status = krav.get("efterlevet", "")
+              color = colors.get(status, "#6c757d")
 
-<div class="doc">
-{html.escape(krav.get('retningslinjer',''))}
-</div>
+              out.append(f'<div class="krav" id="{kid}">')
+              out.append(f"<h2>{kid} - {title}</h2>")
+              out.append(f'<p><span class="badge" style="background:{color}">{html.escape(status)}</span></p>')
+              out.append(f"<p><strong>Kategori:</strong> {html.escape(krav.get('kategori',''))}</p>")
+              out.append("<p><strong>Retningslinjer:</strong></p>")
+              out.append(f'<div class="doc">{html.escape(krav.get("retningslinjer",""))}</div>')
+              out.append("<p><strong>Dokumentation:</strong></p>")
+              out.append(f'<div class="doc">{html.escape(krav.get("dokumentation",""))}</div>')
+              out.append("</div>")
 
-<p>
-<strong>Dokumentation:</strong>
-</p>
+          out.append("</body>")
+          out.append("</html>")
 
-<div class="doc">
-{html.escape(krav.get('dokumentation',''))}
-</div>
-
-</div>
-"""
-
-          report += """
-</body>
-</html>
-"""
-
-          Path(
-              "docs/self-assessment/latest.html"
-          ).write_text(
-              report,
-              encoding="utf-8"
-          )
-
+          (folder / "latest.html").write_text("\n".join(out), encoding="utf-8")
           PYTHON
 
       - name: Commit og push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add docs/self-assessment/*
-
           git commit -m "Tilføj self assessment rapport" || echo "Ingen ændringer"
-
           git push
