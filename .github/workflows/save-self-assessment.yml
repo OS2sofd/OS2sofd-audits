@@ -33,10 +33,57 @@ jobs:
           EOF
           echo "Saved $FILE"
 
+      - name: Generer Markdown rapport
+        run: |
+          python << 'PYTHON'
+          import json
+          from pathlib import Path
+
+          json_files = sorted(Path("docs/self-assessment").glob("*.json"))
+          latest = json_files[-1]
+
+          data = json.loads(latest.read_text(encoding="utf-8"))
+
+          md = []
+          md.append(f"# {data.get('productName', 'Produkt')} - Selvevaluering")
+          md.append("")
+          md.append(f"**Udfyldt af:** {data.get('filledBy', '')}")
+          md.append("")
+          md.append(f"**Dato:** {data.get('filledDate', '')}")
+          md.append("")
+          md.append(f"**Kilde:** `{latest.name}`")
+          md.append("")
+
+          for krav in data.get("krav", []):
+              md.append("---")
+              md.append("")
+              md.append(f"## {krav.get('id', '')} - {krav.get('krav', '')}")
+              md.append("")
+              md.append(f"**Kategori:** {krav.get('kategori', '')}")
+              md.append("")
+              md.append(f"**Produktniveau:** {krav.get('produktniveau', '')}")
+              md.append("")
+              md.append(f"**Status:** {krav.get('efterlevet', '')}")
+              md.append("")
+              md.append("**Retningslinjer:**")
+              md.append("")
+              md.append(krav.get("retningslinjer", ""))
+              md.append("")
+              md.append("**Dokumentation / vurdering:**")
+              md.append("")
+              md.append(krav.get("dokumentation", ""))
+              md.append("")
+
+          Path("docs/self-assessment/latest.md").write_text(
+              "\n".join(md),
+              encoding="utf-8"
+          )
+          PYTHON
+
       - name: Commit og push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/self-assessment/*.json
-          git commit -m "Tilføj self assessment JSON" || echo "Ingen ændringer"
+          git add docs/self-assessment/*
+          git commit -m "Tilføj self assessment JSON og rapport" || echo "Ingen ændringer"
           git push
