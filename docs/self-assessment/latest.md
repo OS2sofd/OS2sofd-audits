@@ -4,7 +4,7 @@
 
 **Dato:** 2026-06-23
 
-**Kilde:** `os2sofd-20260624T112347Z.json`
+**Kilde:** `os2sofd-20260624T114259Z.json`
 
 ---
 
@@ -116,7 +116,7 @@ Frigivet under Mozilla Public License 2.0.
 
 ## F3 - Udbudsregler og alm. lovformlighed er overholdt
 
-**Status:** 🟡 Ved ikke
+**Status:** 🔴 Ved ikke
 
 **Kategori:** formkrav
 
