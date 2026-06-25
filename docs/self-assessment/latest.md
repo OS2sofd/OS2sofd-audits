@@ -4,7 +4,7 @@
 
 **Dato:** 2026-06-23
 
-**Kilde:** `os2sofd-20260624T134613Z.json`
+**Kilde:** `os2sofd-20260625T122346Z.json`
 
 ---
 
