@@ -4,7 +4,7 @@
 
 **Dato:** 2026-06-23
 
-**Kilde:** `os2sofd-20260625T122346Z.json`
+**Kilde:** `os2sofd-20260625T124541Z.json`
 
 ---
 
@@ -13,6 +13,8 @@
 **Status:** 🟢 Ja
 
 **Kategori:** relevans
+
+**Produktniveau:** sandkasse
 
 **Retningslinjer:**
 
@@ -31,6 +33,8 @@ https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&editing=false&openfile=true
 
 **Kategori:** relevans
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Beskriv eller henvis til en formel accept fra ledelse hos initiativtagerne til løsningen.
@@ -46,6 +50,8 @@ Løsningen er fra start taget i anvendelse af kommunerne i DIGIT og 3K kommunern
 **Status:** 🟢 Ja
 
 **Kategori:** relevans
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -67,6 +73,8 @@ Den brede anvendelse og det aktive fællesskab dokumenterer et betydeligt fælle
 
 **Kategori:** relevans
 
+**Produktniveau:** 3
+
 **Retningslinjer:**
 
 Henvis til relevante strategier og forklar hvordan løsningen understøtter disse.
@@ -82,6 +90,8 @@ Henvis til relevante strategier og forklar hvordan løsningen understøtter diss
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** sandkasse
 
 **Retningslinjer:**
 
@@ -104,6 +114,8 @@ Der er samtidig tale om et aktivt vedligeholdt repository med løbende releases.
 
 **Kategori:** formkrav
 
+**Produktniveau:** sandkasse
+
 **Retningslinjer:**
 
 Angiv hvilken OSI-godkendt licens projektet bruger. OS2 standard er MPL 2.0
@@ -119,6 +131,8 @@ Frigivet under Mozilla Public License 2.0.
 **Status:** 🔴 Ved ikke
 
 **Kategori:** formkrav
+
+**Produktniveau:** sandkasse
 
 **Retningslinjer:**
 
@@ -136,6 +150,8 @@ I den tidligere OS2-governancevurdering er det anført, at de udbudsretlige forh
 
 **Kategori:** formkrav
 
+**Produktniveau:** sandkasse
+
 **Retningslinjer:**
 
 Beskriv hvordan sikkerhed er indtænkt i design, kode og drift – f.eks. kryptering, adgangsstyring.
@@ -151,6 +167,8 @@ OS2sofd er designet med fokus på sikkerhed og databeskyttelse. Løsningen anven
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** sandkasse
 
 **Retningslinjer:**
 
@@ -168,6 +186,8 @@ Formål og målgruppe er beskrevet i produktbeskrivelsen for OS2sofd. Løsningen
 
 **Kategori:** formkrav
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Bekræft og link til det officielle repository i OS2s versionskontrol.
@@ -184,6 +204,8 @@ https://github.com/OS2sofd/os2sofd
 **Status:** 🔴 Nej
 
 **Kategori:** formkrav
+
+**Produktniveau:** 1
 
 **Retningslinjer:**
 
@@ -208,6 +230,8 @@ https://www.sofd.io/documentation/SOFD%20Core%20-%20IdM%20processer%20-%20overbl
 
 **Kategori:** formkrav
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Bekræft og link til omtale på f.eks. os2.eu, nyhedsbrev eller andet.
@@ -227,6 +251,8 @@ https://app.heyloyalty.com/view/ZXlKcGRpSTZJbU5pVVd4eFVXRXliamhIZG1vMlNteDZhVEJD
 **Status:** 🔴 Nej
 
 **Kategori:** formkrav
+
+**Produktniveau:** 1
 
 **Retningslinjer:**
 
@@ -249,6 +275,8 @@ https://github.com/orgs/OS2sofd/projects/1/views/1
 
 **Kategori:** formkrav
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Bekræft at der kun findes én ‘main’ version og at den er aktivt vedligeholdt.
@@ -264,6 +292,8 @@ OS2sofd har én fælles hovedversion af core-koden (master), som fungerer som de
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -281,6 +311,8 @@ https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&editing=false&openfile=true
 
 **Kategori:** formkrav
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 F.eks. businesscase, one-pager til direktionsniveau og præsentation til udvalg.
@@ -296,6 +328,8 @@ https://boks.os2.eu/s/QmWBeFYe8po3NbW?dir=/&editing=false&openfile=true
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -318,6 +352,8 @@ https://www.sofd.io/documentation.html
 
 **Kategori:** formkrav
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Beskriv hvilke kodestandarder projektet følger. Evt. med links til eksterne guides og supplerende retningslinjer.
@@ -336,6 +372,8 @@ Der er derfor ikke offentlig tilgængelig dokumentation, som opfylder kravet om 
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -362,6 +400,8 @@ Løsningen består af et centralt webbaseret kernesystem med tilhørende integra
 
 **Kategori:** formkrav
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Beskriv om/hvordan løsningen følger fællesoffentlig rammearkitektur – eller forklar hvorfor ikke.
@@ -381,6 +421,8 @@ Løsningen understøtter særligt arkitekturprincipperne om fælles styring, sam
 
 **Kategori:** formkrav
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Angiv om løsningen tilbydes i en containeriseret version som definerer hvordan applikationen bygges og køres.
@@ -399,6 +441,8 @@ Løsningen understøtter således containeriseret drift af de centralt driftede 
 **Status:** 🟢 Ja
 
 **Kategori:** formkrav
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -424,6 +468,8 @@ SOFD Core - IdM processer - overblik
 
 **Kategori:** formkrav
 
+**Produktniveau:** 3
+
 **Retningslinjer:**
 
 Angiv indhold der kan bruges i politiske fora – f.eks. beslutningsoplæg eller pressemeddelelse.
@@ -440,6 +486,8 @@ Angiv indhold der kan bruges i politiske fora – f.eks. beslutningsoplæg eller
 
 **Kategori:** formkrav
 
+**Produktniveau:** 3
+
 **Retningslinjer:**
 
 Tilføj en implementeringsplan med ‘hvem gør hvad hvornår’.
@@ -455,6 +503,8 @@ Tilføj en implementeringsplan med ‘hvem gør hvad hvornår’.
 **Status:** 🟢 Ja
 
 **Kategori:** strategisk
+
+**Produktniveau:** 1
 
 **Retningslinjer:**
 
@@ -475,6 +525,8 @@ Der afholdes to årlige ERFA-arrangementer, og løsningen bidrager til fællesof
 
 **Kategori:** strategisk
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Angiv hvordan open source-værdier og nyskabelse er tænkt ind.
@@ -493,6 +545,8 @@ Den fælles udviklingsmodel gør det muligt for kommunerne at genbruge funktiona
 **Status:** 🟢 Ja
 
 **Kategori:** strategisk
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -513,6 +567,8 @@ Løsningen bidrager til digital sammenhængskraft ved at standardisere og dele o
 
 **Kategori:** strategisk
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Beskriv produktvision og strategiske mål.
@@ -528,6 +584,8 @@ OS2sofd er designet til at være kommunens fælles platform for organisations- o
 **Status:** ⚪ Ikke relevant
 
 **Kategori:** strategisk
+
+**Produktniveau:** 3
 
 **Retningslinjer:**
 
@@ -545,6 +603,8 @@ Forklar hvordan løsningen passer ind i OS2’s overordnede værdisæt og vision
 
 **Kategori:** governance
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Produktet er oprettet på OS2s hjemmeside og indgår i årshjul.
@@ -561,6 +621,8 @@ OS2sofd er et etableret OS2-produkt med egen produktside på OS2's hjemmeside og
 
 **Kategori:** governance
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Bekræft, evt. med årshjul/datoer/mails for koordinering.
@@ -576,6 +638,8 @@ Der gennemføres løbende koordinering mellem produktets governance, leverandør
 **Status:** 🟢 Ja
 
 **Kategori:** governance
+
+**Produktniveau:** 1
 
 **Retningslinjer:**
 
@@ -595,6 +659,8 @@ Koordineringen varetages gennem produktets governance-struktur med ansvar for co
 
 **Kategori:** governance
 
+**Produktniveau:** 1
+
 **Retningslinjer:**
 
 Vedlæg dokumentation for orientering.
@@ -611,6 +677,8 @@ OS2sofd har gennem flere år været en del af OS2-porteføljen og har løbende v
 
 **Kategori:** governance
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Vedlæg dokumentation for godkendelse.
@@ -626,6 +694,8 @@ OS2sofd er et etableret OS2-produkt og må derfor anses for at være godkendt ge
 **Status:** 🟢 Ja
 
 **Kategori:** governance
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -644,6 +714,8 @@ Der er etableret en styregruppe omkring OS2sofd med deltagelse fra anvenderkommu
 
 **Kategori:** governance
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Beskrivelse af koordinationsgruppen og roller/ansvar/opgaver.
@@ -659,6 +731,8 @@ Der er etableret en koordinationsgruppe/community omkring OS2sofd, som løbende 
 **Status:** 🟢 Ja
 
 **Kategori:** governance
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -677,6 +751,8 @@ https://github.com/orgs/OS2sofd/projects/1/views/1
 
 **Kategori:** governance
 
+**Produktniveau:** 2
+
 **Retningslinjer:**
 
 Angiv hvilken ekstern part som udfører eller har udført review.
@@ -692,6 +768,8 @@ Angiv hvilken ekstern part som udfører eller har udført review.
 **Status:** 🟢 Ja
 
 **Kategori:** governance
+
+**Produktniveau:** 2
 
 **Retningslinjer:**
 
@@ -711,6 +789,8 @@ https://boks.os2.eu/s/Di5cTQdSABd6ak4?dir=/Produkter/OS2sofd%20-%20Offentlig/Til
 
 **Kategori:** governance
 
+**Produktniveau:** 3
+
 **Retningslinjer:**
 
 Vedlæg dokumentation for beslutning.
@@ -726,6 +806,8 @@ Vedlæg dokumentation for beslutning.
 **Status:** ⚪ Ikke relevant
 
 **Kategori:** governance
+
+**Produktniveau:** 3
 
 **Retningslinjer:**
 
@@ -743,6 +825,8 @@ Angiv hvilket medlem som deltager på vegne af bestyrelsen.
 
 **Kategori:** governance
 
+**Produktniveau:** 3
+
 **Retningslinjer:**
 
 Vedlæg eller beskriv finansieringsaftalen.
@@ -758,6 +842,8 @@ Vedlæg eller beskriv finansieringsaftalen.
 **Status:** ⚪ Ikke relevant
 
 **Kategori:** governance
+
+**Produktniveau:** 3
 
 **Retningslinjer:**
 
